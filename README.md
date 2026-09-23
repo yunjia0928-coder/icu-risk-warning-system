@@ -3,6 +3,9 @@ Early ICU Risk Warning System Based on Multiple Imputation and Tree Models
 
 _Developed as part of BMI5101 coursework at NUS._
 
+## Project Status
+🚧 Ongoing
+
 PROBLEM
 
 When a patient is in the ICU, doctors watch numbers: heart rate, blood pressure, oxygen level, blood tests, and more. If these numbers start trending badly, that's often a sign the patient is deteriorating — sometimes hours before a nurse or doctor notices it themselves.
