@@ -21,8 +21,8 @@ So, we are trying to fill missing values using multiple computation as well as c
 
 ## IMPLEMENTATION
 
-# Collect Data
-# Fill missing values using python’s MICE
-# Compute risk scores for each imputed value using XGBoost
-# Pool (ensemble) them using techniques like Rubin’s rule  to see how much each score differs from one another and produce a single confidence score.
-# Can visualize it in a dashboard if possible.
+- Collect Data
+- Fill missing values using python’s MICE
+- Compute risk scores for each imputed value using XGBoost
+- Pool (ensemble) them using techniques like Rubin’s rule  to see how much each score differs from one another and produce a single confidence score.
+- Can visualize it in a dashboard if possible.
