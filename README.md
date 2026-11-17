@@ -1,28 +1,83 @@
-# icu-risk-warning-system
-Early ICU Risk Warning System Based on Multiple Imputation and Tree Models
+# Early ICU Risk Warning System
 
-_Developed as part of BMI5101 coursework at NUS._
+Machine-learning workflow for ICU risk prediction under missing clinical data, developed as part of BMI5101 coursework at the National University of Singapore.
 
-## Project Status
-🚧 Ongoing
+## Overview
 
-## PROBLEM
+ICU datasets frequently contain missing measurements because clinical variables are collected at different frequencies and according to patient needs. Missingness therefore becomes an important consideration when developing predictive models from longitudinal clinical data.
 
-When a patient is in the ICU, doctors watch numbers: heart rate, blood pressure, oxygen level, blood tests, and more. If these numbers start trending badly, that's often a sign the patient is deteriorating — sometimes hours before a nurse or doctor notices it themselves.
-This is exactly the kind of pattern a computer model can be trained to catch early. Feed it a patient's numbers over time, and it can output a "risk score" updated continuously as new measurements come in.
-The catch: ICU data might be often missing values. A blood test might be taken every 6 hours, not every minute. So at any given moment, most of the numbers a model would want are simply not there yet. This is called missing data, and it's the single biggest practical obstacle to real-time ICU prediction.
+This project explored a risk-prediction workflow that combines multiple imputation with tree-based machine learning. Instead of relying on a single imputed dataset, multiple plausible versions of the missing data were generated and propagated through the prediction workflow to examine variation in predicted risk.
 
-## THE GAP ADDRESSED
+## Research Question
 
-To summarize the literature review we have done:
-Many of the existing works have tried to fill missing values using Single-imputation and have explicitly stated it couldn’t be trusted 100% as it is a single guess value.
-Some papers have neglected the missing records and some papers like RealMIP have implemented Multiple Imputation. However, the issues as stated in RealMIP research paper is that, though there could be multiple guessed values there’s no measure to highlight the distinction between observed and imputed value, which will act as a risk-score and help the doctors/nurses in decision-making.
-So, we are trying to fill missing values using multiple computation as well as come up with a measure that says how much these values disagree with each other and come up with a confidence score.
+Can multiple imputation be incorporated into an ICU risk-prediction workflow to account for uncertainty arising from missing clinical measurements?
 
-## IMPLEMENTATION
+The project focused on two related objectives:
 
-- Collect Data
-- Fill missing values using python’s MICE
-- Compute risk scores for each imputed value using XGBoost
-- Pool (ensemble) them using techniques like Rubin’s rule  to see how much each score differs from one another and produce a single confidence score.
-- Can visualize it in a dashboard if possible.
+- Develop a predictive modeling workflow for ICU risk using multiply imputed clinical data.
+- Examine variation in predicted risk across imputations as an additional indicator of prediction uncertainty.
+
+## Workflow
+
+### 1. Data preprocessing
+
+- Cleaned and prepared ICU clinical data in Python.
+- Conducted exploratory data analysis.
+- Assessed patterns and extent of missing data.
+- Prepared variables for downstream modeling.
+
+### 2. Multiple imputation
+
+Missing clinical values were handled using Multiple Imputation by Chained Equations (MICE), generating multiple plausible completed datasets rather than relying on a single imputed value.
+
+### 3. Risk prediction
+
+An XGBoost model was applied to the imputed datasets to generate patient-level risk predictions.
+
+### 4. Prediction pooling and uncertainty
+
+Predictions generated across multiple imputations were combined to obtain an overall risk estimate.
+
+Variation across the imputation-specific predictions was also examined to characterize uncertainty associated with the missing-data imputation process.
+
+### 5. Model evaluation
+
+Model performance was assessed using:
+
+- Cross-validation
+- Bootstrap-based evaluation
+- Predictive performance metrics used in the final analysis
+
+## Tech Stack
+
+- Python
+- pandas
+- scikit-learn
+- XGBoost
+- Multiple imputation / MICE
+- Jupyter Notebook
+
+## My Contributions
+
+This was a team-based biomedical informatics project.
+
+My contributions included:
+
+- Clinical data cleaning and preprocessing
+- Exploratory data analysis
+- Missing-data assessment
+- Multiple-imputation workflow
+
+## Key Takeaways
+
+This project provided hands-on experience with an end-to-end clinical machine-learning workflow, including data preprocessing, missing-data handling, predictive modeling, and model evaluation.
+
+It also highlighted an important modeling consideration: uncertainty introduced during preprocessing can propagate into downstream predictions and should be considered when interpreting patient-level risk estimates.
+
+## Project Context
+
+Course: BMI5101  
+National University of Singapore  
+MSc Biomedical Informatics (Analytics)
+
+Completed: October 2026
